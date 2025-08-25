@@ -16,7 +16,7 @@ function App() {
     i18n.changeLanguage(lng);
   };
   return (
-    <Router basename="/home">
+    <Router basename="/kozmetika-kobarid">
       <div className="d-flex flex-column h-100 min-vh-100">
         <Navbar bg="white" expand="md" className="shadow-sm px-3 w-100" expanded={expanded} onToggle={setExpanded}>
           <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
@@ -52,6 +52,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage t={t} />} />
             <Route path="/where" element={<WherePage t={t} />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </div>
         <footer className="w-100 py-2 bg-light border-top text-center" style={{opacity: 0.7, fontSize: '0.95rem'}}>
