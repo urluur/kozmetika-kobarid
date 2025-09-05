@@ -7,6 +7,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import WherePage from './pages/WherePage';
+import CountryFlag from 'react-country-flag';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -25,22 +26,58 @@ function App() {
         <Navbar.Toggle aria-controls="main-navbar" />
         <Navbar.Collapse id="main-navbar">
           <Nav className="ms-auto align-items-center gap-2">
-            <Nav.Link active={page === 'home'} onClick={() => setPage('home')}>{t('tabHome')}</Nav.Link>
-            <Nav.Link active={page === 'about'} onClick={() => setPage('about')}>{t('tabAbout')}</Nav.Link>
-            <Nav.Link active={page === 'where'} onClick={() => setPage('where')}>{t('tabWhere')}</Nav.Link>
+            <Nav.Link
+              active={page === 'home'}
+              onClick={() => {
+                setPage('home');
+                setExpanded(false);
+              }}
+            >
+              {t('tabHome')}
+            </Nav.Link>
+            <Nav.Link
+              active={page === 'about'}
+              onClick={() => {
+                setPage('about');
+                setExpanded(false);
+              }}
+            >
+              {t('tabAbout')}
+            </Nav.Link>
+            <Nav.Link
+              active={page === 'where'}
+              onClick={() => {
+                setPage('where');
+                setExpanded(false);
+              }}
+            >
+              {t('tabWhere')}
+            </Nav.Link>
             <Button variant="primary" className="ms-3" href="https://cal.com/urluur" target="_blank" rel="noopener noreferrer">{t('bookOnline')}</Button>
             <Dropdown align="end" className="ms-2">
               <Dropdown.Toggle variant="outline-secondary" id="dropdown-flags">
-                {i18n.language === 'sl' && '🇸🇮'}
-                {i18n.language === 'en' && '🇬🇧'}
-                {i18n.language === 'it' && '🇮🇹'}
-                {i18n.language === 'de' && '🇩🇪'}
+                {i18n.language === 'sl' && <CountryFlag countryCode="SI" svg style={{ width: '1.5em', height: '1.5em' }} />}
+                {i18n.language === 'en' && <CountryFlag countryCode="GB" svg style={{ width: '1.5em', height: '1.5em' }} />}
+                {i18n.language === 'it' && <CountryFlag countryCode="IT" svg style={{ width: '1.5em', height: '1.5em' }} />}
+                {i18n.language === 'de' && <CountryFlag countryCode="DE" svg style={{ width: '1.5em', height: '1.5em' }} />}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={() => changeLanguage('sl')}>🇸🇮 Slovenščina</Dropdown.Item>
-                <Dropdown.Item onClick={() => changeLanguage('en')}>🇬🇧 English</Dropdown.Item>
-                <Dropdown.Item onClick={() => changeLanguage('it')}>🇮🇹 Italiano</Dropdown.Item>
-                <Dropdown.Item onClick={() => changeLanguage('de')}>🇩🇪 Deutsch</Dropdown.Item>
+                <Dropdown.Item onClick={() => changeLanguage('sl')}>
+                  <CountryFlag countryCode="SI" svg style={{ width: '1.2em', height: '1.2em', marginRight: '0.5em' }} />
+                  Slovenščina
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => changeLanguage('en')}>
+                  <CountryFlag countryCode="GB" svg style={{ width: '1.2em', height: '1.2em', marginRight: '0.5em' }} />
+                  English
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => changeLanguage('it')}>
+                  <CountryFlag countryCode="IT" svg style={{ width: '1.2em', height: '1.2em', marginRight: '0.5em' }} />
+                  Italiano
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => changeLanguage('de')}>
+                  <CountryFlag countryCode="DE" svg style={{ width: '1.2em', height: '1.2em', marginRight: '0.5em' }} />
+                  Deutsch
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
@@ -51,7 +88,7 @@ function App() {
         {page === 'about' && <AboutPage t={t} />}
         {page === 'where' && <WherePage t={t} />}
       </div>
-      <footer className="w-100 py-2 bg-light border-top text-center" style={{opacity: 0.7, fontSize: '0.95rem'}}>
+      <footer className="w-100 mb-2 text-center" style={{opacity: 0.7, fontSize: '0.95rem'}}>
         <span>🌸 {t('footer')} &copy; 2025</span>
       </footer>
     </div>
